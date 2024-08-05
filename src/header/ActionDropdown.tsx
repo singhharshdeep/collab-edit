@@ -9,7 +9,9 @@ export default function ActionDropdown({ editor, heading, options }) {
       editor.isActive(actionName, { level }),
     );
 
-    return selectedOption[0].label;
+    console.log(selectedOption);
+
+    return selectedOption.length !== 0 ? selectedOption[0].label : "";
   };
 
   return (
@@ -30,7 +32,7 @@ export default function ActionDropdown({ editor, heading, options }) {
       </button>
       <div
         id="dropdown"
-        className={`absolute ${!isOpen ? "hidden" : ""} mt-10 ml-40 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-32 dark:bg-gray-700`}
+        className={`absolute ${!isOpen ? "hidden" : ""} mt-10 ml-40 z-10 bg-indigo-300 divide-y divide-gray-100 rounded-lg shadow w-32`}
       >
         <ul
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -43,7 +45,7 @@ export default function ActionDropdown({ editor, heading, options }) {
                   onClick();
                   setIsOpen(false);
                 }}
-                className={`block px-4 py-2 hover:bg-gray-100 ${editor.isActive(actionName, { level }) ? "bg-gray-100" : ""}`}
+                className={`block px-4 py-2 hover:bg-indigo-600 ${editor.isActive(actionName, { level }) ? "bg-indigo-700" : ""}`}
               >
                 {label}
               </div>
