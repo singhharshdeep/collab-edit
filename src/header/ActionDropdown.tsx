@@ -9,8 +9,6 @@ export default function ActionDropdown({ editor, heading, options }) {
       editor.isActive(actionName, { level }),
     );
 
-    console.log(selectedOption);
-
     return selectedOption.length !== 0 ? selectedOption[0].label : "";
   };
 
