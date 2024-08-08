@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -7,7 +7,6 @@ import Editor from "./editor";
 import Header from "./header";
 
 function App() {
-  const [isConnected, setIsConnected] = useState(socket.connected);
   const editor = useEditor({
     extensions: [
       StarterKit.configure(),
