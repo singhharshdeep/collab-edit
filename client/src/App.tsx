@@ -15,35 +15,15 @@ function App() {
     content: "",
   });
 
-  editor?.on("update", ({ editor }) => {
-    socket.emit("send-update", editor.getHTML());
-    console.log(editor.getHTML());
-  });
-
-  socket.on("receive-update", (data) => {
-    editor?.commands.setContent(data);
-  });
-
-  if (!editor) return null;
+  editor?.on("update", ({ editor }) => socket.emit("send-update", editor.getHTML()));
 
   useEffect(() => {
-    function onConnect() {
-      console.log("Connected to the server");
-      setIsConnected(true);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-    };
+    socket.on("receive-update", (data) => {
+      editor?.commands.setContent(data);
+    });  
   }, []);
+
+  if (!editor) return null;
 
   return (
     <div className="bg-indigo-100">
