@@ -9,7 +9,7 @@ export default function ActionDropdown({
 }: {
   editor: TipTapEditor;
   heading: string;
-  options: { onClick: () => void; label: string; actionName: string; level: number }[]
+  options: { onClick: () => void; label: string; actionName: string; level?: number }[]
 }) {
   const [isOpen, setIsOpen] = useState(false);
 

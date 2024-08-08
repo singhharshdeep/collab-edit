@@ -13,8 +13,27 @@ import { Editor as TipTapEditor } from "@tiptap/react";
 import EditorAction from "./EditorAction";
 import ActionDropdown from "./ActionDropdown";
 
+interface Button {
+  onClick: () => void;
+  icon: JSX.Element;
+  actionName: string;
+  type: "button";
+}
+
+interface Dropdown {
+  actionName: string;
+  type: "dropdown";
+  heading?: string;
+  options: {
+    onClick: () => void;
+    label: string;
+    actionName: string;
+    level?: number;
+  }[];
+};
+
 export default function EditorTools({ editor }: { editor: TipTapEditor }) {
-  const actions = [
+  const actions: Array<Button | Dropdown> = [
     {
       onClick: () => editor.chain().focus().toggleBold().run(),
       icon: <FaBold className="fill-gray-800" />,
@@ -121,22 +140,22 @@ export default function EditorTools({ editor }: { editor: TipTapEditor }) {
 
   return (
     <div className="flex w-full bg-indigo-200 mt-2 rounded-2xl p-2">
-      {actions.map(({ onClick, icon, actionName, type, heading, options }) =>
+      {actions.map(({ type, actionName, ...action }) =>
         type === "dropdown" ? (
           <ActionDropdown
             key={actionName}
             editor={editor}
-            heading={heading || ""}
-            options={options}
+            heading={(action as Dropdown).heading || ""}
+            options={(action as Dropdown).options}
           />
         ) : (
           <EditorAction
             key={actionName}
             editor={editor}
-            onClick={onClick}
+            onClick={(action as Button).onClick}
             actionName={actionName}
           >
-            {icon}
+            {(action as Button).icon}
           </EditorAction>
         ),
       )}
