@@ -13,7 +13,7 @@ const server = createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
-    }
+    },
 });
 
 app.use(cors(corsOptions));
@@ -29,9 +29,11 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     socket.on("send-update", (data) => {
-        console.log("Doc updated");
-        console.log(data);
         socket.broadcast.emit("receive-update", data);
+    });
+
+    socket.on('send-document-name', (data) => {
+        socket.broadcast.emit('receive-document-name', data);
     });
 });
 
