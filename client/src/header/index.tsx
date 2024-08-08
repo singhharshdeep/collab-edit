@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { IoMdDocument } from "react-icons/io";
+import { Editor as TipTapEditor } from "@tiptap/react";
 
 import { socket } from "../socket";
 import DocumentName from "./DocumentName";
 import EditorTools from "./EditorTools";
 
-export default function Header({ editor }) {
+export default function Header({ editor } : { editor: TipTapEditor }) {
   const [name, setName] = useState("Untitled Document");
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Header({ editor }) {
         <IoMdDocument className="fill-blue-600 size-10" />
         <DocumentName
           name={name}
-          onChange={(e) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setName(e.target.value);
             document.title = name === "" ? "Untitled Document" : e.target.value;
             socket.emit("send-document-name", e.target.value);

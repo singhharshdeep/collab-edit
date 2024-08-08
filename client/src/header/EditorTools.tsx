@@ -8,10 +8,12 @@ import {
   FaRegFileCode,
 } from "react-icons/fa";
 import { TbBlockquote } from "react-icons/tb";
+import { Editor as TipTapEditor } from "@tiptap/react";
+
 import EditorAction from "./EditorAction";
 import ActionDropdown from "./ActionDropdown";
 
-export default function EditorTools({ editor }) {
+export default function EditorTools({ editor }: { editor: TipTapEditor }) {
   const actions = [
     {
       onClick: () => editor.chain().focus().toggleBold().run(),
@@ -124,7 +126,7 @@ export default function EditorTools({ editor }) {
           <ActionDropdown
             key={actionName}
             editor={editor}
-            heading={heading}
+            heading={heading || ""}
             options={options}
           />
         ) : (

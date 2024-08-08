@@ -1,8 +1,16 @@
+import { Editor as TipTapEditor } from "@tiptap/react";
+import { ReactNode } from "react";
+
 export default function EditorAction({
   editor,
   children,
   onClick,
   actionName,
+}: {
+  editor: TipTapEditor;
+  children: ReactNode;
+  onClick: () => void;
+  actionName: string;
 }) {
   return (
     <div

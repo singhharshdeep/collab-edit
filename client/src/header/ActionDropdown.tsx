@@ -1,7 +1,16 @@
 import { useState } from "react";
+import { Editor as TipTapEditor } from "@tiptap/react";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
-export default function ActionDropdown({ editor, heading, options }) {
+export default function ActionDropdown({
+  editor,
+  heading,
+  options
+}: {
+  editor: TipTapEditor;
+  heading: string;
+  options: { onClick: () => void; label: string; actionName: string; level: number }[]
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const getHeading = () => {
