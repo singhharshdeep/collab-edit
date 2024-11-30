@@ -7,7 +7,7 @@ import DocumentName from "./DocumentName";
 import EditorTools from "./EditorTools";
 
 export default function Header({ editor } : { editor: TipTapEditor }) {
-  const [name, setName] = useState("Untitled Document");
+  const [name, setName] = useState("Testing");
 
   useEffect(() => {
     socket.on("receive-document-name", (data) => {
